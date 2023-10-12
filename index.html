@@ -1,70 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Personal Website</title>
+    <title>Your Name - Robotics & Electronics Enthusiast</title>
+    <script src="https://threejs.org/build/three.js"></script>
     <style>
-        /* Add your CSS styles here to customize the appearance of your website */
+        @keyframes neonFlicker {
+            0% { color: #0AF; text-shadow: 0 0 5px #0FF, 0 0 10px #0FF; }
+            10% { color: #FFF; text-shadow: 0 0 5px #FFF, 0 0 10px #FFF; }
+            100% { color: #0AF; text-shadow: 0 0 5px #0FF, 0 0 10px #0FF; }
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(45deg, #121212, #000);
+            color: #0AF;
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
+            overflow-x: hidden;
         }
-        header {
-            background-color: #007BFF;
-            color: #fff;
+
+        .header {
+            background-color: #222;
+            padding: 20px 0;
+            text-align: center;
+            border-bottom: 3px solid #0AF;
+        }
+
+        .content {
+            margin: 20px;
             padding: 20px;
-            text-align: center;
+            background-color: rgba(0, 10, 20, 0.8);
+            border: 1px solid #0AF;
+            border-radius: 5px;
+            animation: neonFlicker 2s infinite alternate;
         }
-        h1 {
-            margin: 0;
-            font-size: 36px;
+
+        h1, h2, h3 {
+            color: #0FF;
+            text-shadow: 0 0 5px #0FF, 0 0 10px #0FF;
         }
-        nav {
-            background-color: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
+
+        a {
+            color: #0AF;
             text-decoration: none;
-            margin: 0 20px;
+            text-shadow: 0 0 5px #0FF;
         }
-        .container {
-            max-width: 960px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .resume {
+            background-color: rgba(0, 10, 20, 0.6);
+            padding: 10px;
+            border: 1px dashed #0AF;
+            border-radius: 5px;
+        }
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
     </style>
 </head>
+
 <body>
-    <header>
+    <div id="canvas-container"></div>
+    <div class="header">
         <h1>Your Name</h1>
-        <p>AI & Robotics Enthusiast</p>
-    </header>
-    <nav>
-        <a href="#about">About</a>
-        <a href="#resume">Resume</a>
-        <a href="#contact">Contact</a>
-    </nav>
-    <div class="container">
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Write a brief introduction about yourself here.</p>
-        </section>
-        <section id="resume">
-            <h2>Resume</h2>
-            <p>Include your resume/CV content here.</p>
-        </section>
-        <section id="contact">
-            <h2>Contact</h2>
-            <p>Contact information and a contact form can go here.</p>
-        </section>
+        <p>Robotics & Electronics Enthusiast</p>
     </div>
+
+    <div class="content">
+        <div class="section">
+            <h2>About Me</h2>
+            <p>
+                Brief summary about your background. This could include where you studied, any achievements, or what you're passionate about.
+            </p>
+        </div>
+
+        <div class="section">
+            <h2>Resume</h2>
+            <div class="resume">
+                <h3>Education</h3>
+                <p>
+                    Details about your educational background.
+                </p>
+
+                <h3>Experience</h3>
+                <p>
+                    Details about your professional experience.
+                </p>
+
+                <h3>Skills</h3>
+                <p>
+                    List of your skills related to robotics, electronics, and other relevant areas.
+                </p>
+
+                <h3>Projects</h3>
+                <p>
+                    A few highlighted projects that you've worked on.
+                </p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Contact</h2>
+            <p>
+                If you have any questions or want to get in touch, you can <a href="mailto:your-email@example.com">email me</a> or find me on <a href="#">LinkedIn</a>.
+            </p>
+        </div>
+    </div>
+    <script>
+        let scene, camera, renderer, cube;
+
+        function init() {
+            // Set up the scene
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            renderer = new THREE.WebGLRenderer({ alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+            // Create a cube with a wireframe material
+            let geometry = new THREE.BoxGeometry(1, 1, 1);
+            let material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+            cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+
+            camera.position.z = 5;
+
+            animate();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate the cube
+            cube.rotation.x += 0.01;
+            cube.rotation.y += 0.01;
+
+            renderer.render(scene, camera);
+        }
+
+        // Resize the renderer and update camera aspect ratio on window resize
+        window.addEventListener('resize', function () {
+            let width = window.innerWidth;
+            let height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
+
+        init();
+    </script>
 </body>
+
 </html>
