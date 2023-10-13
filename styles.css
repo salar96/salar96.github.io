@@ -1,0 +1,60 @@
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(45deg, #121212, #000);
+    color: #0AF;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+#canvas-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 20px 0;
+    text-align: center;
+    background-color: #222;
+    border-bottom: 3px solid #0AF;
+    overflow: hidden;
+}
+
+nav li {
+    display: inline-block;
+}
+
+nav li a {
+    color: #0FF;
+    text-shadow: 0 0 5px #0FF, 0 0 10px #0FF;
+    padding: 0 15px;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    text-decoration: underline;
+    color: #FFF;
+}
+
+.content {
+    margin: 20px;
+    padding: 20px;
+    background-color: rgba(0, 10, 20, 0.8);
+    border: 1px solid #0AF;
+    border-radius: 5px;
+    animation: neonFlicker 2s infinite alternate;
+}
+
+@keyframes neonFlicker {
+    0% { color: #0AF; text-shadow: 0 0 5px #0FF, 0 0 10px #0FF; }
+    10% { color: #FFF; text-shadow: 0 0 5px #FFF, 0 0 10px #FFF; }
+    100% { color: #0AF; text-shadow: 0 0 5px #0FF, 0 0 10px #0FF; }
+}
+
+.preformatted {
+    white-space: pre
