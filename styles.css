@@ -58,3 +58,37 @@ nav li a:hover {
 
 .preformatted {
     white-space: pre
+}
+
+header {
+    text-align: center;
+    padding: 20px 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0 10px #0FF;
+    animation: neonFlicker 2s infinite alternate;
+}
+
+header h1, header p {
+    margin: 0;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.column {
+    width: 48%; /* Slightly less than 50% to create a small gap in the middle */
+    padding: 20px;
+    background-color: rgba(0, 10, 20, 0.8);
+    border: 1px solid #0AF;
+    border-radius: 5px;
+}
+
+.profile-pic {
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #0FF;
+}
