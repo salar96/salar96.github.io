@@ -92,7 +92,7 @@ header h1, header p {
 }
 
 .profile-pic {
-    width: 100%;
+    width: 50%;
     border-radius: 5px;
     box-shadow: 0 0 10px #0FF;
 }
